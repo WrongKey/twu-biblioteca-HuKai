@@ -1,6 +1,7 @@
 package com.twu.biblioteca.service;
 
 import com.twu.biblioteca.domain.Book;
+import org.junit.Before;
 import org.junit.Test;
 
 import java.io.ByteArrayOutputStream;
@@ -13,13 +14,21 @@ import static org.junit.Assert.assertEquals;
 
 public class ConsoleServiceTest {
 
-    @Test
-    public void should_show_welcome_message() throws Exception {
-        OutputStream outputStream = new ByteArrayOutputStream();
-        PrintStream ps = new PrintStream(outputStream);
+    private OutputStream outputStream;
+    private PrintStream ps;
+    private ConsoleService consoleService;
+
+    @Before
+    public void setUp() throws Exception {
+        outputStream = new ByteArrayOutputStream();
+        ps = new PrintStream(outputStream);
         System.setOut(ps);
 
-        ConsoleService consoleService = new ConsoleService();
+        consoleService = new ConsoleService();
+    }
+
+    @Test
+    public void should_show_welcome_message() throws Exception {
         consoleService.showWelcomeMessage();
 
         assertEquals(outputStream.toString(),"Welcome to Biblioteca!\n");
@@ -27,17 +36,13 @@ public class ConsoleServiceTest {
 
     @Test
     public void should_display_list_of_all_library_books() throws Exception {
-        OutputStream outputStream = new ByteArrayOutputStream();
-        PrintStream ps = new PrintStream(outputStream);
-        System.setOut(ps);
+        List<Book> books = Arrays.asList(new Book("978-0201485677","Refactoring","Martin Fowler & Kent Beck","1999"),
+                new Book("978-0132350884","Clean Code","Robert C. Martin","2008"));
+        String expectedDisplay = "978-0201485677\t\tRefactoring\t\tMartin Fowler & Kent Beck\t\t1999\n"+
+                "978-0132350884\t\tClean Code\t\tRobert C. Martin\t\t2008\n";
 
-        List<Book> books = Arrays.asList(new Book("978-0201485677","Refactoring","Martin Fowler & Kent Beck"),
-                new Book("978-0132350884","Clean Code","Robert C. Martin"));
-        ConsoleService consoleService = new ConsoleService();
         consoleService.displayBooks(books);
 
-        String expectedDisplay = "978-0201485677\t\tRefactoring\t\tMartin Fowler & Kent Beck\n"+
-                "978-0132350884\t\tClean Code\t\tRobert C. Martin\n";
         assertEquals(outputStream.toString(), expectedDisplay);
     }
 }
