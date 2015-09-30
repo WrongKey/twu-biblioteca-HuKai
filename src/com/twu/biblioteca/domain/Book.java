@@ -15,6 +15,6 @@ public class Book {
 
     @Override
     public String toString() {
-        return String.format("%s\t\t%s\t\t%s\t\t%s", isbn, title, author,yearPublished);
+        return String.format("%s\t\t\t\t%s\t\t\t\t%s\t\t\t\t%s", isbn, title, author,yearPublished);
     }
 }

@@ -28,28 +28,23 @@ public class ConsoleServiceTest {
     }
 
     @Test
-    public void should_show_welcome_message() throws Exception {
+    public void should_show_welcome_message() {
         consoleService.showWelcomeMessage();
 
         assertEquals(outputStream.toString(),"Welcome to Biblioteca!\n");
     }
 
     @Test
-    public void should_display_list_of_all_library_books() throws Exception {
+    public void should_display_list_of_books() {
         List<Book> books = Arrays.asList(new Book("978-0201485677","Refactoring","Martin Fowler & Kent Beck","1999"),
                 new Book("978-0132350884","Clean Code","Robert C. Martin","2008"));
-        String expectedDisplay = "978-0201485677\t\tRefactoring\t\tMartin Fowler & Kent Beck\t\t1999\n"+
-                "978-0132350884\t\tClean Code\t\tRobert C. Martin\t\t2008\n";
+        String expectedDisplay = "\n" +
+                "All books as follows:\n" +
+                "\tisbn\t\t\t\t\t\ttitle\t\t\t\t\tauthor\t\t\t\t\tpublished year\n" +
+                "978-0201485677\t\t\t\tRefactoring\t\t\t\tMartin Fowler & Kent Beck\t\t\t\t1999\n" +
+                "978-0132350884\t\t\t\tClean Code\t\t\t\tRobert C. Martin\t\t\t\t2008\n";
 
         consoleService.displayBooks(books);
-
-        assertEquals(outputStream.toString(), expectedDisplay);
-    }
-
-    @Test
-    public void should_display_main_menu_with_menu_item_list_books() {
-        String expectedDisplay = "1. List Books\n";
-        consoleService.displayMenu();
 
         assertEquals(outputStream.toString(), expectedDisplay);
     }
