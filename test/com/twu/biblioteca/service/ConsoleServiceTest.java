@@ -45,4 +45,12 @@ public class ConsoleServiceTest {
 
         assertEquals(outputStream.toString(), expectedDisplay);
     }
+
+    @Test
+    public void should_display_main_menu_with_menu_item_list_books() {
+        String expectedDisplay = "1. List Books\n";
+        consoleService.displayMenu();
+
+        assertEquals(outputStream.toString(), expectedDisplay);
+    }
 }

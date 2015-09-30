@@ -14,4 +14,8 @@ public class ConsoleService {
             System.out.println(book);
         }
     }
+
+    public void displayMenu() {
+        System.out.println("1. List Books");
+    }
 }
